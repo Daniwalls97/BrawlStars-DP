@@ -1,18 +1,12 @@
 import 'package:brawlstars/src/components/brawlerDetail.dart';
 import 'package:brawlstars/src/components/brawlersList.dart';
-import 'package:brawlstars/src/components/home.dart';
+import 'package:brawlstars/src/pages/home.dart';
 import 'package:brawlstars/src/components/webview.dart';
 import 'package:brawlstars/src/pages/videoPlayer.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
-import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 main() => runApp(const MyApp());
 

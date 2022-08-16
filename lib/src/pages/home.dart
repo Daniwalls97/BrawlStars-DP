@@ -1,8 +1,4 @@
-import 'dart:developer';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:brawlstars/src/api/api_services.dart';
-import 'package:brawlstars/src/models/brawlers.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {

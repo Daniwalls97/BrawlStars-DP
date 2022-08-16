@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:brawlstars/src/models/brawlers.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -55,6 +55,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             style: appBarTitlesStyle,
             textAlign: TextAlign.center,
           ),
+          actions: <Widget>[
+            IconButton(
+                icon: const Icon(Icons.share),
+                onPressed: () {
+                  Share.share(brawlerVideo.videoUrl);
+                })
+          ],
         ),
         // Usa un FutureBuilder para visualizar un spinner de carga mientras espera a que
         // la inicialización de VideoPlayerController finalice.
