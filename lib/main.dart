@@ -1,7 +1,7 @@
-import 'package:brawlstars/src/components/brawlerDetail.dart';
-import 'package:brawlstars/src/components/brawlersList.dart';
+import 'package:brawlstars/src/pages/brawlerDetail.dart';
+import 'package:brawlstars/src/pages/brawlers.dart';
 import 'package:brawlstars/src/pages/home.dart';
-import 'package:brawlstars/src/components/webview.dart';
+import 'package:brawlstars/src/pages/brawlStarsBlog.dart';
 import 'package:brawlstars/src/pages/videoPlayer.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -45,8 +45,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Nougat');
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
-    BrawlersList(),
-    WebViewExample(),
+    Brawlers(),
+    BrawlStarsBlog(),
   ];
 
   void _onItemTapped(int index) {
@@ -54,9 +54,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       _selectedIndex = index;
     });
   }
-
-  final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
 
   @override
   void initState() {

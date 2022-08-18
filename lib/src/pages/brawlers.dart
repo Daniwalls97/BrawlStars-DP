@@ -1,48 +1,23 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:brawlstars/src/api/api_services.dart';
+import 'package:brawlstars/src/utils/colors.dart';
+import 'package:brawlstars/src/utils/styles.dart';
 import 'package:brawlstars/src/models/brawlers.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-class BrawlersList extends StatefulWidget {
-  const BrawlersList({Key? key}) : super(key: key);
+class Brawlers extends StatefulWidget {
+  const Brawlers({Key? key}) : super(key: key);
 
   @override
-  _BrawlersListStage createState() => _BrawlersListStage();
+  _BrawlersStage createState() => _BrawlersStage();
 }
 
-class _BrawlersListStage extends State<BrawlersList> {
+class _BrawlersStage extends State<Brawlers> {
   late List<Brawler>? _brawlerList = [];
   late List<Brawler>? _brawlerShowList = [];
   bool showSearchBar = false;
-
-  static const TextStyle loadingStyle = TextStyle(
-      fontSize: 25,
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Nougat',
-      color: Colors.amber);
-  static const TextStyle titleStyle = TextStyle(
-      fontSize: 30,
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Nougat',
-      color: Colors.black);
-  static const TextStyle titleStyleDialog = TextStyle(
-      fontSize: 30,
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Nougat',
-      color: Colors.white);
-
-  static const TextStyle buttonStyleType = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Nougat',
-      fontSize: 20,
-      color: Colors.black);
-
-  static const TextStyle buttonStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Nougat',
-      fontSize: 20,
-      color: Colors.white);
 
   @override
   void initState() {
@@ -105,7 +80,7 @@ class _BrawlersListStage extends State<BrawlersList> {
                     ),
                     const Text(
                       "Loading...",
-                      style: loadingStyle,
+                      style: Styles.loadingStyle,
                     )
                   ],
                 ),
@@ -132,12 +107,12 @@ class _BrawlersListStage extends State<BrawlersList> {
                 backgroundColor: Colors.black, onPressed: () {})
             : SpeedDial(
                 icon: Icons.search,
-                backgroundColor: const Color.fromARGB(255, 228, 111, 249),
+                backgroundColor: CustomColors.primaryPink,
                 activeIcon: Icons.close,
                 activeBackgroundColor: Colors.grey[800],
                 children: [
                     SpeedDialChild(
-                      backgroundColor: const Color.fromARGB(255, 228, 111, 249),
+                      backgroundColor: CustomColors.primaryPink,
                       child: const Icon(
                         Icons.list,
                         color: Colors.white,
@@ -162,7 +137,7 @@ class _BrawlersListStage extends State<BrawlersList> {
                                       children: <Widget>[
                                         TextButton(
                                           child: Text("All types",
-                                              style: buttonStyleType), // 0
+                                              style: Styles.buttonStyleType),
                                           style: TextButton.styleFrom(
                                             minimumSize:
                                                 const Size.fromHeight(40),
@@ -175,21 +150,25 @@ class _BrawlersListStage extends State<BrawlersList> {
                                             Navigator.of(context).pop();
                                           },
                                         ),
+                                        CategoryButton("Trophy Road",
+                                            CustomColors.trophyRoadHex, 1),
                                         CategoryButton(
-                                            "Trophy Road", "#b9eaff", 1),
-                                        CategoryButton("Rare", "#68fd58", 2),
+                                            "Rare", CustomColors.rareHex, 2),
+                                        CategoryButton("Super Rare",
+                                            CustomColors.superRareHex, 3),
                                         CategoryButton(
-                                            "Super Rare", "#5ab3ff", 3),
-                                        CategoryButton("Epic", "#d850ff", 4),
-                                        CategoryButton("Mythic", "#fe5e72", 5),
-                                        CategoryButton(
-                                            "Legendary", "#fff11e", 6),
-                                        CategoryButton(
-                                            "Chromatic", "#f88f25", 7)
+                                            "Epic", CustomColors.epicHex, 4),
+                                        CategoryButton("Mythic",
+                                            CustomColors.mythicHex, 5),
+                                        CategoryButton("Legendary",
+                                            CustomColors.legendaryHex, 6),
+                                        CategoryButton("Chromatic",
+                                            CustomColors.chromaticHex, 7)
                                       ],
                                     ),
                                     ElevatedButton(
-                                      child: Text("CANCEL", style: buttonStyle),
+                                      child: Text("CANCEL",
+                                          style: Styles.buttonStyle),
                                       style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
@@ -207,8 +186,7 @@ class _BrawlersListStage extends State<BrawlersList> {
                       },
                     ),
                     SpeedDialChild(
-                        backgroundColor:
-                            const Color.fromARGB(255, 228, 111, 249),
+                        backgroundColor: CustomColors.primaryPink,
                         child: const Icon(
                           Icons.text_fields,
                           color: Colors.white,
@@ -234,7 +212,7 @@ class _BrawlersListStage extends State<BrawlersList> {
 
   Widget CategoryButton(String text, String hex, id) {
     return TextButton(
-      child: Text(text, style: buttonStyleType), // 6
+      child: Text(text, style: Styles.buttonStyleType), // 6
       style: TextButton.styleFrom(
           minimumSize: const Size.fromHeight(40),
           backgroundColor: HexColor(hex)),
@@ -295,10 +273,10 @@ class _BrawlersListStage extends State<BrawlersList> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
+                      AutoSizeText(
                         brawler.name,
                         maxLines: 1,
-                        style: titleStyle,
+                        style: Styles.titleStyle,
                         textAlign: TextAlign.center,
                       ),
                     ],

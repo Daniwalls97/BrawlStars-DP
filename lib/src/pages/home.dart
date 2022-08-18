@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:brawlstars/src/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -13,17 +14,6 @@ class _Home extends State<Home> {
   void initState() {
     super.initState();
   }
-
-  static const TextStyle titleStyle = TextStyle(
-    fontSize: 40,
-    fontWeight: FontWeight.bold,
-    fontFamily: 'Nougat',
-  );
-  static const TextStyle sunTitleStyle = TextStyle(
-    fontSize: 50,
-    fontWeight: FontWeight.bold,
-    fontFamily: 'Nougat',
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +30,14 @@ class _Home extends State<Home> {
               children: <Widget>[
                 const Text(
                   "Welcome to...",
-                  style: titleStyle,
+                  style: Styles.homeTitleStyle,
                   textAlign: TextAlign.center,
                 ),
                 AnimatedTextKit(
                   animatedTexts: [
                     TypewriterAnimatedText(
                       'Brawl Stars',
-                      textStyle: sunTitleStyle,
+                      textStyle: Styles.sunTitleStyle,
                       speed: const Duration(milliseconds: 1000),
                     ),
                   ],
