@@ -58,6 +58,7 @@ class _BrawlersStage extends State<Brawlers> {
                             onPressed: () {
                               setState(() {
                                 showSearchBar = !showSearchBar;
+                                _brawlerShowList = _brawlerList;
                               });
                             },
                           ),
@@ -124,9 +125,7 @@ class _BrawlersStage extends State<Brawlers> {
                             return Container(
                               color: Colors.grey[800],
                               child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
+                                child: ListView(
                                   children: <Widget>[
                                     Column(
                                       mainAxisAlignment:
@@ -233,60 +232,58 @@ class _BrawlersStage extends State<Brawlers> {
 
     return list.map((brawler) {
       return Card(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        elevation: 20,
-        color: HexColor(brawler.rarity.color),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
-          side: BorderSide(
-            color: Colors.white.withOpacity(0.4),
-            width: 3,
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          elevation: 20,
+          color: HexColor(brawler.rarity.color),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+            side: BorderSide(
+              color: Colors.white.withOpacity(0.4),
+              width: 3,
+            ),
           ),
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Hero(
-          tag: brawler.id,
+          clipBehavior: Clip.antiAlias,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: 14 / 12,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: GestureDetector(
-                    child: FadeInImage(
-                      placeholder:
-                          const AssetImage('assets/img/loading_leon.gif'),
-                      image: NetworkImage(brawler.imageUrl),
-                      fit: BoxFit.cover,
-                      height: 50,
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, 'detailPage',
-                          arguments: brawler);
-                    },
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      AutoSizeText(
-                        brawler.name,
-                        maxLines: 1,
-                        style: Styles.titleStyle,
-                        textAlign: TextAlign.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Hero(
+                  tag: brawler.id,
+                  child: AspectRatio(
+                    aspectRatio: 14 / 12,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30.0),
+                      child: GestureDetector(
+                        child: FadeInImage(
+                          placeholder:
+                              const AssetImage('assets/img/loading_leon.gif'),
+                          image: NetworkImage(brawler.imageUrl),
+                          fit: BoxFit.cover,
+                          height: 50,
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, 'detailPage',
+                              arguments: brawler);
+                        },
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      );
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          brawler.name,
+                          maxLines: 1,
+                          style: Styles.titleStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ]));
     }).toList();
   }
 }
