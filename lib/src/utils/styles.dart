@@ -36,9 +36,28 @@ class Styles {
     fontWeight: FontWeight.bold,
     fontFamily: 'Nougat',
   );
+
   static const TextStyle sunTitleStyle = TextStyle(
     fontSize: 50,
     fontWeight: FontWeight.bold,
     fontFamily: 'Nougat',
   );
+
+  static const TextStyle appBarTitlesStyle =
+      TextStyle(fontFamily: 'Nougat', fontSize: 20);
+
+  static const TextStyle titlesStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Nougat',
+      fontSize: 30,
+      color: Colors.white);
+
+  static const TextStyle descriptionStyle =
+      TextStyle(fontFamily: 'Nougat', fontSize: 20, color: Colors.white);
+
+  static const TextStyle optionStyle = TextStyle(
+      fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'Nougat');
+
+  static const TextStyle navBarTitlesStyle =
+      TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Nougat');
 }

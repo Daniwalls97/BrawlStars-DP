@@ -3,16 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class BrawlStarsBlog extends StatefulWidget {
-  const BrawlStarsBlog({Key? key, this.cookieManager}) : super(key: key);
+class BlogPage extends StatefulWidget {
+  const BlogPage({Key? key, this.cookieManager}) : super(key: key);
 
   final CookieManager? cookieManager;
 
   @override
-  State<BrawlStarsBlog> createState() => _BrawlStarsBlogState();
+  State<BlogPage> createState() => _BlogPageState();
 }
 
-class _BrawlStarsBlogState extends State<BrawlStarsBlog> {
+class _BlogPageState extends State<BlogPage> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 

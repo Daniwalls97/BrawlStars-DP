@@ -93,10 +93,10 @@ flutter:
   fonts:
     - family: LilitaOne
       fonts:
-        - asset: fonts/LilitaOne-Regular.ttf      
+        - asset: assets/fonts/LilitaOne-Regular.ttf      
     - family: Nougat
       fonts:
-        - asset: fonts/Nougat-ExtraBlack.ttf
+        - asset: assets/fonts/Nougat-ExtraBlack.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

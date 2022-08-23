@@ -1,20 +1,20 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:brawlstars/src/api/api_services.dart';
+import 'package:brawlstars/src/pages/brawlers/widgets/brawlersWidgets.dart';
 import 'package:brawlstars/src/utils/colors.dart';
 import 'package:brawlstars/src/utils/styles.dart';
-import 'package:brawlstars/src/models/brawlers.dart';
+import 'package:brawlstars/src/models/brawler/brawler.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
-class Brawlers extends StatefulWidget {
-  const Brawlers({Key? key}) : super(key: key);
+class BrawlersPage extends StatefulWidget {
+  const BrawlersPage({Key? key}) : super(key: key);
 
   @override
-  _BrawlersStage createState() => _BrawlersStage();
+  State<BrawlersPage> createState() => _BrawlersPageState();
 }
 
-class _BrawlersStage extends State<Brawlers> {
+class _BrawlersPageState extends State<BrawlersPage> {
   late List<Brawler>? _brawlerList = [];
   late List<Brawler>? _brawlerShowList = [];
   bool showSearchBar = false;
@@ -51,10 +51,9 @@ class _BrawlersStage extends State<Brawlers> {
                   child: Center(
                     child: TextField(
                       decoration: InputDecoration(
-                          prefixIcon:
-                              const Icon(Icons.search, color: Colors.black),
+                          prefixIcon: BrawlersWidgets.searchIcon,
                           suffixIcon: IconButton(
-                            icon: const Icon(Icons.clear, color: Colors.black),
+                            icon: BrawlersWidgets.closeIcon,
                             onPressed: () {
                               setState(() {
                                 showSearchBar = !showSearchBar;
@@ -87,21 +86,14 @@ class _BrawlersStage extends State<Brawlers> {
                 ),
               )
             : Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/img/ruff.jpg"),
-                      fit: BoxFit.cover,
-                      opacity: 0.4),
-                ),
+                decoration: BrawlersWidgets.wallpaper,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 0.0),
                   child: GridView.count(
                       crossAxisCount: 2,
                       padding: const EdgeInsets.all(16.0),
                       childAspectRatio: 8.0 / 8.0,
-                      children:
-                          _buildGridCards(context, _brawlerShowList!) // Replace
-                      ),
+                      children: buildGridCards(context, _brawlerShowList!)),
                 )),
         floatingActionButton: _brawlerList == null || _brawlerList!.isEmpty
             ? FloatingActionButton(
@@ -114,10 +106,7 @@ class _BrawlersStage extends State<Brawlers> {
                 children: [
                     SpeedDialChild(
                       backgroundColor: CustomColors.primaryPink,
-                      child: const Icon(
-                        Icons.list,
-                        color: Colors.white,
-                      ),
+                      child: BrawlersWidgets.listIcon,
                       onTap: () {
                         showModalBottomSheet<void>(
                           context: context,
@@ -135,8 +124,6 @@ class _BrawlersStage extends State<Brawlers> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
                                         TextButton(
-                                          child: Text("All types",
-                                              style: Styles.buttonStyleType),
                                           style: TextButton.styleFrom(
                                             minimumSize:
                                                 const Size.fromHeight(40),
@@ -148,6 +135,7 @@ class _BrawlersStage extends State<Brawlers> {
                                             });
                                             Navigator.of(context).pop();
                                           },
+                                          child: BrawlersWidgets.allTypesText,
                                         ),
                                         CategoryButton("Trophy Road",
                                             CustomColors.trophyRoadHex, 1),
@@ -166,8 +154,6 @@ class _BrawlersStage extends State<Brawlers> {
                                       ],
                                     ),
                                     ElevatedButton(
-                                      child: Text("CANCEL",
-                                          style: Styles.buttonStyle),
                                       style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
@@ -175,6 +161,7 @@ class _BrawlersStage extends State<Brawlers> {
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
+                                      child: BrawlersWidgets.cancelText,
                                     ),
                                   ],
                                 ),
@@ -225,7 +212,8 @@ class _BrawlersStage extends State<Brawlers> {
     );
   }
 
-  List<Card> _buildGridCards(BuildContext context, List<Brawler> list) {
+  // Create brawlers grid cards
+  List<Card> buildGridCards(BuildContext context, List<Brawler> list) {
     if (list.isEmpty) {
       return const <Card>[];
     }

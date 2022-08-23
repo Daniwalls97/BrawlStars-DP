@@ -1,5 +1,10 @@
 import 'dart:convert';
 
+import 'package:brawlstars/src/models/brawler/class.dart';
+import 'package:brawlstars/src/models/brawler/gadget.dart';
+import 'package:brawlstars/src/models/brawler/rarity.dart';
+import 'package:brawlstars/src/models/brawler/video.dart';
+
 Brawlers brawlersFromJson(String str) => Brawlers.fromJson(json.decode(str));
 
 String welcomeToJson(Brawlers data) => json.encode(data.toJson());
@@ -103,129 +108,5 @@ class Brawler {
         "starPowers": List<dynamic>.from(starPowers.map((x) => x.toJson())),
         "gadgets": List<dynamic>.from(gadgets.map((x) => x.toJson())),
         "videos": List<dynamic>.from(videos.map((x) => x.toJson())),
-      };
-}
-
-class Gadget {
-  Gadget({
-    required this.id,
-    required this.name,
-    required this.path,
-    required this.version,
-    required this.description,
-    required this.imageUrl,
-    required this.released,
-  });
-
-  int id;
-  String name;
-  String path;
-  int version;
-  String description;
-  String imageUrl;
-  bool released;
-
-  factory Gadget.fromJson(Map<String, dynamic> json) => Gadget(
-        id: json["id"],
-        name: json["name"],
-        path: json["path"],
-        version: json["version"],
-        description: json["description"],
-        imageUrl: json["imageUrl"],
-        released: json["released"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "path": path,
-        "version": version,
-        "description": description,
-        "imageUrl": imageUrl,
-        "released": released,
-      };
-}
-
-class Class {
-  Class({
-    required this.id,
-    required this.name,
-  });
-
-  int id;
-  String name;
-
-  factory Class.fromJson(Map<String, dynamic> json) => Class(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
-}
-
-class Rarity {
-  Rarity({
-    required this.id,
-    required this.name,
-    required this.color,
-  });
-
-  int id;
-  String name;
-  String color;
-
-  factory Rarity.fromJson(Map<String, dynamic> json) => Rarity(
-        id: json["id"],
-        name: json["name"],
-        color: json["color"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "color": color,
-      };
-}
-
-class Video {
-  Video({
-    required this.type,
-    required this.name,
-    required this.description,
-    required this.duration,
-    required this.videoUrl,
-    required this.previewUrl,
-    required this.uploadDate,
-  });
-
-  int type;
-  String name;
-  String description;
-  String duration;
-  String videoUrl;
-  String previewUrl;
-  DateTime uploadDate;
-
-  factory Video.fromJson(Map<String, dynamic> json) => Video(
-        type: json["type"],
-        name: json["name"],
-        description: json["description"],
-        duration: json["duration"],
-        videoUrl: json["videoUrl"],
-        previewUrl: json["previewUrl"],
-        uploadDate: DateTime.parse(json["uploadDate"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "type": type,
-        "name": name,
-        "description": description,
-        "duration": duration,
-        "videoUrl": videoUrl,
-        "previewUrl": previewUrl,
-        "uploadDate": uploadDate.toIso8601String(),
       };
 }

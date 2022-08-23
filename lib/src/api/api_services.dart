@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:brawlstars/src/api/constants.dart';
-import 'package:brawlstars/src/models/brawlers.dart';
+import 'package:brawlstars/src/models/brawler/brawler.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {

@@ -1,15 +1,16 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:brawlstars/src/pages/home/widgets/homeWidgets.dart';
 import 'package:brawlstars/src/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _Home createState() => _Home();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _Home extends State<Home> {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -19,20 +20,12 @@ class _Home extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/img/wallpaper.png"),
-                fit: BoxFit.cover),
-          ),
+          decoration: HomeWidgets.wallpaper,
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                const Text(
-                  "Welcome to...",
-                  style: Styles.homeTitleStyle,
-                  textAlign: TextAlign.center,
-                ),
+                HomeWidgets.welcomeText,
                 AnimatedTextKit(
                   animatedTexts: [
                     TypewriterAnimatedText(

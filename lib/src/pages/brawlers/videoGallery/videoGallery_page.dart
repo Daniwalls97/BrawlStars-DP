@@ -1,18 +1,19 @@
 import 'dart:async';
-
-import 'package:brawlstars/src/models/brawlers.dart';
+import 'package:brawlstars/src/models/brawler/video.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 
-class VideoPlayerScreen extends StatefulWidget {
-  const VideoPlayerScreen({Key? key}) : super(key: key);
+import '../../../utils/styles.dart';
+
+class VideoGalleryPage extends StatefulWidget {
+  const VideoGalleryPage({Key? key}) : super(key: key);
 
   @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+  _VideoGalleryPageState createState() => _VideoGalleryPageState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+class _VideoGalleryPageState extends State<VideoGalleryPage> {
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
 
@@ -25,15 +26,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Widget build(BuildContext context) {
     final Video brawlerVideo =
         ModalRoute.of(context)!.settings.arguments as Video;
-    const TextStyle appBarTitlesStyle =
-        TextStyle(fontFamily: 'Nougat', fontSize: 20);
-    const TextStyle titlesStyle = TextStyle(
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Nougat',
-        fontSize: 30,
-        color: Colors.white);
-    const TextStyle descriptionStyle =
-        TextStyle(fontFamily: 'Nougat', fontSize: 20, color: Colors.white);
 
     _controller = VideoPlayerController.network(
       brawlerVideo.videoUrl,
@@ -41,9 +33,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
     // Inicializa el controlador y almacena el Future para utilizarlo luego
     _initializeVideoPlayerFuture = _controller.initialize();
-
     _controller.setLooping(true);
-
     _controller.play();
 
     return Scaffold(
@@ -52,7 +42,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           backgroundColor: Colors.grey[800],
           title: const Text(
             "VIDEO GALLERY",
-            style: appBarTitlesStyle,
+            style: Styles.appBarTitlesStyle,
             textAlign: TextAlign.center,
           ),
           actions: <Widget>[
@@ -63,8 +53,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 })
           ],
         ),
-        // Usa un FutureBuilder para visualizar un spinner de carga mientras espera a que
-        // la inicialización de VideoPlayerController finalice.
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -73,7 +61,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   padding: const EdgeInsets.all(30.0),
                   child: Text(
                     brawlerVideo.name,
-                    style: titlesStyle,
+                    style: Styles.titlesStyle,
                   ),
                 ),
                 FutureBuilder(
@@ -84,15 +72,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       // los datos que proporciona para limitar la relación de aspecto del VideoPlayer
                       return AspectRatio(
                           aspectRatio: _controller.value.aspectRatio,
-                          // Usa el Widget VideoPlayer para mostrar el vídeo
                           child: Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                   child: VideoPlayer(_controller))));
                     } else {
-                      // Si el VideoPlayerController todavía se está inicializando, muestra un
-                      // spinner de carga
+                      // Si el VideoPlayerController todavía se está inicializando, muestra un spinner de carga
                       return const Center(
                           child: CircularProgressIndicator(
                         color: Color.fromARGB(255, 228, 111, 249),
@@ -104,13 +90,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   padding: const EdgeInsets.all(30.0),
                   child: Text(
                     brawlerVideo.description,
-                    style: descriptionStyle,
+                    style: Styles.descriptionStyle,
                   ),
                 ),
               ],
             ),
           ),
-        ) // Esta coma final hace que el formateo automático sea mejor para los métodos de compilación.
-        );
+        ));
   }
 }

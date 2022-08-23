@@ -1,26 +1,25 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:brawlstars/src/models/brawlers.dart';
+import 'package:brawlstars/src/models/brawler/brawler.dart';
+import 'package:brawlstars/src/models/brawler/gadget.dart';
+import 'package:brawlstars/src/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class BrawlerDetail extends StatelessWidget {
-  const BrawlerDetail({Key? key}) : super(key: key);
+class BrawlerDetailPage extends StatelessWidget {
+  const BrawlerDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final Brawler brawler =
         ModalRoute.of(context)!.settings.arguments as Brawler;
-    const TextStyle appBarTitlesStyle = TextStyle(
-        fontWeight: FontWeight.bold, fontFamily: 'Nougat', fontSize: 30);
 
-    const TextStyle descriptionStyle = TextStyle(color: Colors.white);
     return Scaffold(
       backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
           brawler.name,
-          style: appBarTitlesStyle,
+          style: Styles.appBarTitlesStyle,
         ),
         backgroundColor: Colors.grey[800],
         actions: <Widget>[
