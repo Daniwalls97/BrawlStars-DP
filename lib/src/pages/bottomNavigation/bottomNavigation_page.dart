@@ -2,6 +2,7 @@ import 'package:brawlstars/src/pages/bottomNavigation/widgets/bottomNavigationWi
 import 'package:brawlstars/src/utils/colors.dart';
 import 'package:brawlstars/src/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
 
@@ -23,6 +24,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     if (Platform.isAndroid) {
       WebView.platform = SurfaceAndroidWebView();
     }
