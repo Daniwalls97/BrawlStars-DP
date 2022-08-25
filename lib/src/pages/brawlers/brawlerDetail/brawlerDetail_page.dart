@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:brawlstars/src/models/brawler/brawler.dart';
 import 'package:brawlstars/src/models/brawler/gadget.dart';
+import 'package:brawlstars/src/models/brawler/video.dart';
 import 'package:brawlstars/src/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -23,26 +24,8 @@ class BrawlerDetailPage extends StatelessWidget {
         ),
         backgroundColor: Colors.grey[800],
         actions: <Widget>[
-          IconButton(
-              icon: const Icon(Icons.video_library_outlined),
-              onPressed: () {
-                if (brawler.videos.isNotEmpty) {
-                  Navigator.pushNamed(context, 'videoPage',
-                      arguments: brawler.videos[0]);
-                } else {
-                  showAlertDialog(context);
-                }
-              }),
-          IconButton(
-              icon: const Icon(Icons.video_library_rounded),
-              onPressed: () {
-                if (brawler.videos.isNotEmpty) {
-                  Navigator.pushNamed(context, 'videoPage',
-                      arguments: brawler.videos[1]);
-                } else {
-                  showAlertDialog(context);
-                }
-              })
+          _AppBarIconButton(brawler, brawler.videos[0], context),
+          _AppBarIconButton(brawler, brawler.videos[1], context),
         ],
       ),
       body: SingleChildScrollView(
@@ -143,6 +126,18 @@ class BrawlerDetailPage extends StatelessWidget {
   }
 }
 
+Widget _AppBarIconButton(Brawler brawler, Video video, BuildContext context) {
+  return IconButton(
+      icon: const Icon(Icons.video_library_rounded),
+      onPressed: () {
+        if (brawler.videos.isNotEmpty) {
+          Navigator.pushNamed(context, 'videoPage', arguments: video);
+        } else {
+          showAlertDialog(context);
+        }
+      });
+}
+
 Widget _Skill(Gadget gadget) {
   const TextStyle titleStyle =
       TextStyle(color: Colors.white, fontSize: 20, fontFamily: 'Nougat');
@@ -170,21 +165,8 @@ Widget _Skill(Gadget gadget) {
             child: Center(
                 child: Column(
               children: [
-                Container(
-                  width: 250,
-                  child: Text(
-                    gadget.name,
-                    style: titleStyle,
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                Container(
-                    width: 250,
-                    child: Text(
-                      gadget.description,
-                      style: descriptionStyle,
-                      textAlign: TextAlign.left,
-                    ))
+                _SkillText(gadget.name, titleStyle),
+                _SkillText(gadget.description, descriptionStyle)
               ],
             )),
           )
@@ -192,6 +174,16 @@ Widget _Skill(Gadget gadget) {
       ),
     ),
   ));
+}
+
+Widget _SkillText(String text, TextStyle style) {
+  return Container(
+      width: 250,
+      child: Text(
+        text,
+        style: style,
+        textAlign: TextAlign.left,
+      ));
 }
 
 Widget _Description(Brawler brawler) {
@@ -237,17 +229,11 @@ Widget _Image(Brawler brawler) {
 }
 
 Widget _Title(Brawler brawler) {
-  const TextStyle titlesStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Nougat',
-      fontSize: 50,
-      color: Colors.white);
-
   return Padding(
     padding: const EdgeInsets.only(top: 20.0),
     child: Text(
       brawler.name,
-      style: titlesStyle,
+      style: Styles.brawlerTitlesStyle,
     ),
   );
 }
@@ -267,12 +253,6 @@ Widget _SubTitle(
     HexColor(color3),
   ];
 
-  const colorizeTextStyle = TextStyle(
-    fontWeight: FontWeight.bold,
-    fontSize: 35.0,
-    fontFamily: 'Nougat',
-  );
-
   return Padding(
       padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
       child: AnimatedTextKit(
@@ -280,7 +260,7 @@ Widget _SubTitle(
         animatedTexts: [
           ColorizeAnimatedText(
             text,
-            textStyle: colorizeTextStyle,
+            textStyle: Styles.colorizeTextStyle,
             colors: colorizeColors,
           ),
         ],
@@ -288,20 +268,10 @@ Widget _SubTitle(
 }
 
 showAlertDialog(BuildContext context) {
-  const TextStyle titlesStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Nougat',
-      fontSize: 30,
-      color: Colors.white);
-  const TextStyle buttonStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Nougat',
-      fontSize: 20,
-      color: Colors.white);
   const TextStyle descriptionStyle = TextStyle(color: Colors.white);
   // Create button
   Widget okButton = TextButton(
-    child: Text("OK", style: buttonStyle),
+    child: Text("OK", style: Styles.buttonStyle),
     style:
         ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),
     onPressed: () {
@@ -314,7 +284,7 @@ showAlertDialog(BuildContext context) {
     backgroundColor: Colors.grey[800],
     title: const Text(
       "Ops",
-      style: titlesStyle,
+      style: Styles.titlesStyle,
     ),
     content: const Text(
       "No video for this brawler 😭",

@@ -60,4 +60,16 @@ class Styles {
 
   static const TextStyle navBarTitlesStyle =
       TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Nougat');
+
+  static const TextStyle brawlerTitlesStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Nougat',
+      fontSize: 50,
+      color: Colors.white);
+
+  static const TextStyle colorizeTextStyle = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 35.0,
+    fontFamily: 'Nougat',
+  );
 }
