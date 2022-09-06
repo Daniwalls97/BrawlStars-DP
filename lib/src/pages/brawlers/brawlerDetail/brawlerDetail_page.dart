@@ -24,8 +24,12 @@ class BrawlerDetailPage extends StatelessWidget {
         ),
         backgroundColor: Colors.grey[800],
         actions: <Widget>[
-          _AppBarIconButton(brawler, brawler.videos[0], context),
-          _AppBarIconButton(brawler, brawler.videos[1], context),
+          brawler.videos.isNotEmpty
+              ? Row(children: <Widget>[
+                  _AppBarIconButton(brawler, brawler.videos[0], context),
+                  _AppBarIconButton(brawler, brawler.videos[1], context)
+                ])
+              : const Text("")
         ],
       ),
       body: SingleChildScrollView(
